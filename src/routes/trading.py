@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from src.services.trading_algorithm import trading_algorithm
 from src.services.data_collector import data_collector
 from src.services.sentiment_analyzer import sentiment_analyzer
-from src.models.user import db
+from src.main import db
 from src.models.financial_data import CurrencyData, NewsData, TradingSignal
 from datetime import datetime, timedelta
 import logging
