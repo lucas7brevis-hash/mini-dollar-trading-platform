@@ -13,7 +13,7 @@ python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
 python -c "
 import os
 import sys
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, '.')
 from src.main import app
 from src.models.user import db
 from src.models.financial_data import CurrencyData, NewsData, TradingSignal
