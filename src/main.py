@@ -8,9 +8,6 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-from src.routes.user import user_bp
-from src.routes.financial_data import financial_bp
-from src.routes.trading import trading_bp
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
@@ -18,27 +15,31 @@ app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 # Enable CORS for all routes
 CORS(app)
 
-app.register_blueprint(user_bp, url_prefix='/api')
-app.register_blueprint(financial_bp, url_prefix='/api/financial')
-app.register_blueprint(trading_bp, url_prefix='/api/trading')
-
-# uncomment if you need to use database
+# Database configuration
 import os
 database_url = os.environ.get('DATABASE_URL')
 if database_url:
-    # Heroku PostgreSQL
     if database_url.startswith('postgres://'):
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 else:
-    # Local SQLite
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize database with financial models
-from src.models.financial_data import CurrencyData, NewsData, TradingSignal
 db.init_app(app)
+
+# Import blueprints after db is initialized
+from src.routes.user import user_bp
+from src.routes.financial_data import financial_bp
+from src.routes.trading import trading_bp
+
+app.register_blueprint(user_bp, url_prefix='/api')
+app.register_blueprint(financial_bp, url_prefix='/api/financial')
+app.register_blueprint(trading_bp, url_prefix='/api/trading')
+
+# Initialize database with financial models (only if running directly)
 with app.app_context():
+    from src.models.financial_data import CurrencyData, NewsData, TradingSignal
     db.create_all()
 
 @app.route('/', defaults={'path': ''})
