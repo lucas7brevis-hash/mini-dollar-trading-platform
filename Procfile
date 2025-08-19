@@ -1,2 +1,2 @@
-web: gunicorn --chdir src main:app
+web: python3 -m gunicorn --chdir src main:app
 
