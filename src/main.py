@@ -1,8 +1,4 @@
 import os
-import sys
-
-# Adiciona o diretório raiz do projeto ao sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, send_from_directory
 from flask_cors import CORS

@@ -9,11 +9,13 @@ pip install -r requirements.txt
 # Download NLTK data for sentiment analysis
 python -c "import nltk; nltk.download(\'punkt\'); nltk.download(\'vader_lexicon\')"
 
+# Set PYTHONPATH to include the current directory
+export PYTHONPATH=$PYTHONPATH:.
+
 # Create database tables
 python -c "
 import os
 import sys
-sys.path.insert(0, os.getcwd())
 from src.main import app
 from src.models.user import db
 from src.models.financial_data import CurrencyData, NewsData, TradingSignal
