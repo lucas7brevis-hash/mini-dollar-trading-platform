@@ -16,6 +16,4 @@ python3 -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
 export PYTHONPATH=$PYTHONPATH:.
 
 # Create database tables
-python3 -c "import os; import sys; from src.main import app; from src.models.user import db; from src.models.financial_data import CurrencyData, NewsData, TradingSignal; with app.app_context(): db.create_all(); print('Database tables created successfully!')"
-
-
+python3 init_db_render.py
