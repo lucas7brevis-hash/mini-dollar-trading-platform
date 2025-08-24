@@ -9,6 +9,9 @@ sudo apt-get update && sudo apt-get install -y build-essential
 pip install --upgrade pip
 pip install -r requirements.txt
 
+# Ensure NLTK is installed before downloading data
+pip install nltk
+
 # Create NLTK data directory
 mkdir -p nltk_data
 
