@@ -9,8 +9,11 @@ sudo apt-get update && sudo apt-get install -y build-essential
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Download NLTK data for sentiment analysis
-python3 -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
+# Create NLTK data directory
+mkdir -p nltk_data
+
+# Download NLTK data to the created directory
+python3 -m nltk.downloader -d nltk_data punkt vader_lexicon
 
 # Set PYTHONPATH to include the current directory
 export PYTHONPATH=$PYTHONPATH:.
