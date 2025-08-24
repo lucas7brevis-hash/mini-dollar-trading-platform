@@ -17,3 +17,5 @@ export PYTHONPATH=$PYTHONPATH:.
 
 # Create database tables
 python3 init_db_render.py
+
+
