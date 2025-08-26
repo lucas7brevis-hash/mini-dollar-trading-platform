@@ -9,13 +9,9 @@ sudo apt-get update && sudo apt-get install -y build-essential
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Ensure NLTK is installed before downloading data
+# Explicitly install NLTK and download its data
 pip install nltk
-
-# Create NLTK data directory
 mkdir -p nltk_data
-
-# Download NLTK data to the created directory
 python3 -m nltk.downloader -d nltk_data punkt vader_lexicon
 
 # Set PYTHONPATH to include the current directory
