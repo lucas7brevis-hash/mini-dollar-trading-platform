@@ -32,18 +32,17 @@ db.init_app(app)
 from src.routes.user import user_bp
 from src.routes.financial_data import financial_bp
 from src.routes.trading import trading_bp
-
-app.register_blueprint(user_bp, url_prefix='/api')
-app.register_blueprint(financial_bp, url_prefix='/api/financial')
-app.register_blueprint(trading_bp, url_prefix='/api/trading')
+app.register_blueprint(user_bp, url_prefix=\"/api\")
+app.register_blueprint(financial_bp, url_prefix="/api/financial")
+app.register_blueprint(trading_bp, url_prefix="/api/trading")
 
 # Initialize database with financial models (only if running directly)
 with app.app_context():
     from src.models.financial_data import CurrencyData, NewsData, TradingSignal
     db.create_all()
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route("/")
+@app.route("/<path:path>")
 def serve(path):
     static_folder_path = app.static_folder
     if static_folder_path is None:
