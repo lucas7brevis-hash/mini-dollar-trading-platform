@@ -32,7 +32,7 @@ db.init_app(app)
 from src.routes.user import user_bp
 from src.routes.financial_data import financial_bp
 from src.routes.trading import trading_bp
-app.register_blueprint(user_bp, url_prefix=\"/api\")
+app.register_blueprint(user_bp, url_prefix="/api")
 app.register_blueprint(financial_bp, url_prefix="/api/financial")
 app.register_blueprint(trading_bp, url_prefix="/api/trading")
 
